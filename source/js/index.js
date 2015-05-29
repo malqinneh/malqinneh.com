@@ -16,7 +16,9 @@ const host = window.location.hostname
 const port = config.port
 const socket = engine(`ws://${host}:${port}`)
 
-
+/**
+ * Kick it off
+ */
 ready(function () {
 	
 	const $canvas = $('.canvas')

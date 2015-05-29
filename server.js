@@ -16,12 +16,6 @@ const PADDING = 4
 const pluck = (arr) => arr[Math.floor(Math.random()*arr.length)]
 const server = engine.listen(config.port)
 
-server.on('connection', function (socket) {
-	socket.on('message', function (message) {
-		console.log('Received: %s', message)
-	})
-})
-
 
 server.broadcast = function (message, source) {
 	for (let index in server.clients) {
