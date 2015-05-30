@@ -28,7 +28,7 @@ develop: install
 		--dir $(BUILD) \
 		--port $(PORT) \
 		--transform babelify \
-		--live | $(BIN)/garnish
+		--live | $(BIN)/garnish & watch make assets styles --silent
 
 server:
 	@node --harmony --harmony_arrow_functions server.js
@@ -60,7 +60,7 @@ $(BUILD)/%: $(SOURCE)/%
 
 $(BUILD)/assets/index.js: $(SCRIPTS)
 	@mkdir -p $(@D)
-	@browserify $(SOURCE)/index.js -t babelify -o $@
+	@browserify $(SOURCE)/js/index.js -t babelify -o $@
 
 $(BUILD)/assets/styles.css: $(STYLES)
 	@mkdir -p $(@D)

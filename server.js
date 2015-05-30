@@ -11,7 +11,7 @@ const config = require('./config')
  * Config
  */
 const COLORS = config.dots.colors
-const PADDING = 4
+const PADDING = config.dots.padding
 
 const pluck = (arr) => arr[Math.floor(Math.random()*arr.length)]
 const server = engine.listen(config.port)
@@ -29,6 +29,6 @@ setInterval(function () {
 		top: random(PADDING, 100 - PADDING).toFixed(2) + '%',
 		left: random(PADDING, 100 - PADDING).toFixed(2) + '%',
 		color: pluck(COLORS),
-		radius: random(5, 80)
+		radius: 8
 	})
 }, 2000)

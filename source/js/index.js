@@ -22,6 +22,11 @@ const socket = engine(`ws://${host}:${port}`)
 ready(function () {
 	
 	const $canvas = $('.canvas')
+	const $main = $('main')
+
+	$main.find('a')
+		.on('mouseover', () => $main.addClass('hovered'))
+		.on('mouseout', () => $main.removeClass('hovered'))
 	
 	socket.on('open', function () {
 		console.log('opening')
