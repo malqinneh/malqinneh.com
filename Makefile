@@ -10,11 +10,13 @@ BIN := ./node_modules/.bin
 # Variables
 #
 
-PORT    = 8080
-SOURCE  = ./source
-BUILD   = ./build
-SCRIPTS = $(shell find $(SOURCE)/js -type f -name '*.js')
-STYLES  = $(shell find $(SOURCE)/css -type f -name '*.scss')
+PORT     = 8080
+SOURCE   = ./source
+BUILD    = ./build
+SCRIPTS  = $(shell find $(SOURCE)/js -type f -name '*.js')
+STYLES   = $(shell find $(SOURCE)/css -type f -name '*.scss')
+
+BROWSERS = "last 2 versions"
 
 #
 # Tasks
@@ -24,25 +26,31 @@ all: assets styles scripts
 	@true
 
 develop: install
+	@make -j3 budo budo-assets server
+
+budo:
 	@$(BIN)/budo $(SOURCE)/js/index.js:assets/index.js \
 		--dir $(BUILD) \
 		--port $(PORT) \
 		--transform babelify \
-		--live | $(BIN)/garnish & watch make assets styles --silent
+		--live | $(BIN)/garnish
+budo-assets:
+	@watch make assets styles --silent
 
 server:
 	@node --harmony --harmony_arrow_functions server.js
 
-install: node_modules
-
 clean:
-	@rm -rf node_modules
 	@rm -rf build
+clean-deps:
+	@rm -rf node_modules
 
 #
 # Shorthands
 #
 
+install: node_modules
+	@clear
 assets: $(BUILD)/index.html
 scripts: $(BUILD)/assets/index.js
 styles: $(BUILD)/assets/styles.css
@@ -64,11 +72,11 @@ $(BUILD)/assets/index.js: $(SCRIPTS)
 
 $(BUILD)/assets/styles.css: $(STYLES)
 	@mkdir -p $(@D)
-	@sassc --sourcemap --load-path $(SOURCE)/css/ $(SOURCE)/css/styles.scss $@
-	@autoprefixer $@ --clean --map --browsers "last 2 versions"
+	@sassc --sourcemap --load-path $(SOURCE)/css/ $(SOURCE)/css/styles.scss $@ \
+		| $(BIN)/postcss --use autoprefixer --autoprefixer.browsers $(BROWSERS) $@ > $@
 
 #
 # Phony
 #
 
-.PHONY: develop clean
+.PHONY: develop clean clean-deps
