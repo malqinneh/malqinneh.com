@@ -26,6 +26,7 @@ all: assets styles scripts
 	@true
 
 develop: install
+	@clear
 	@make -j3 budo budo-assets budo-server
 
 budo:
@@ -52,7 +53,6 @@ clean-deps:
 #
 
 install: node_modules
-	@clear
 assets: $(BUILD)/index.html
 scripts: $(BUILD)/assets/index.js
 styles: $(BUILD)/assets/styles.css
