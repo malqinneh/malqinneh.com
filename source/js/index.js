@@ -19,12 +19,15 @@ const socket = engine(`ws://${host}:${port}`)
 /**
  * Kick it off
  */
+ 
 ready(function () {
 	
 	const $canvas = $('.canvas')
 	const $main = $('main')
 
-	$main.find('a')
+	// Temporary fix for https://github.com/kenwheeler/cash/issues/54
+	// Should actually be `$main.find('a')`
+	$('main a')
 		.on('mouseover', () => $main.addClass('hovered'))
 		.on('mouseout', () => $main.removeClass('hovered'))
 	

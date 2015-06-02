@@ -16,7 +16,6 @@ const PADDING = config.dots.padding
 const pluck = (arr) => arr[Math.floor(Math.random()*arr.length)]
 const server = engine.listen(config.port)
 
-
 server.broadcast = function (message, source) {
 	for (let index in server.clients) {
 		if (index === source) continue

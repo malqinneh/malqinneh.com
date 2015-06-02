@@ -26,7 +26,7 @@ all: assets styles scripts
 	@true
 
 develop: install
-	@make -j3 budo budo-assets server
+	@make -j3 budo budo-assets budo-server
 
 budo:
 	@$(BIN)/budo $(SOURCE)/js/index.js:assets/index.js \
@@ -36,6 +36,8 @@ budo:
 		--live | $(BIN)/garnish
 budo-assets:
 	@watch make assets styles --silent
+budo-server:
+	@$(BIN)/nodemon --quiet -- --harmony --harmony_arrow_functions server.js
 
 server:
 	@node --harmony --harmony_arrow_functions server.js
