@@ -11,10 +11,22 @@ const config = require('./config')
  * Config
  */
 const COLORS = config.dots.colors
-const PADDING = config.dots.padding
+const COUNT = config.dots.count
+const INTERVAL = config.dots.interval
+const PADDING = parseInt(config.dots.padding, 10)
 
-const pluck = (arr) => arr[Math.floor(Math.random()*arr.length)]
+const randomIndex = (arr) => Math.floor(Math.random()*arr.length)
 const server = engine.listen(config.port)
+const dots = []
+
+// Populate dots to start out
+for (let i = 0; i < COUNT; i++) {
+	dots.push(dot())
+}
+
+// Kick things off
+setInterval(heartbeat, INTERVAL)
+
 
 server.broadcast = function (message, source) {
 	for (let index in server.clients) {
@@ -23,11 +35,19 @@ server.broadcast = function (message, source) {
 	}
 }
 
-setInterval(function () {
+function heartbeat() {
+	dots[randomIndex(dots)] = dot()
 	server.broadcast({
+		clients: Object.keys(server.clients).length,
+		dots: dots
+	})
+}
+
+function dot() {
+	return {
 		top: random(PADDING, 100 - PADDING).toFixed(2) + '%',
 		left: random(PADDING, 100 - PADDING).toFixed(2) + '%',
-		color: pluck(COLORS),
+		color: COLORS[randomIndex(COLORS)],
 		radius: 8
-	})
-}, 2000)
+	}
+}

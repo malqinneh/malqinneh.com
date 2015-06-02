@@ -34,10 +34,10 @@ ready(function () {
 	socket.on('open', function () {
 		console.log('opening')
 		socket.on('message', function (message) {
-			let data = JSON.parse(message)
-			let opts = data
-			opts.container = $canvas
-			dot(opts)
+			let opts = JSON.parse(message)
+			for (let info of opts.dots) {
+				dot($canvas, info)
+			}
 		})
 	})
 	

@@ -13,7 +13,8 @@
 			"#0076ff",
 			"#5751d9"
 		],
-		"delay": 500,
-		"padding": 4
+		"count": 5,
+		"interval": 1500,
+		"padding": "4%"
 	}
 }

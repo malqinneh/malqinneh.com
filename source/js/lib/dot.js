@@ -12,17 +12,17 @@ const config = require('../../../config')
  * Config
  */
 const COLORS = config.dots.colors
-const DELAY = config.dots.delay
+const INTERVAL = config.dots.interval
 
 /**
  * Export `dot`
  */
-module.exports = function (opts) {
+module.exports = function (parent, opts) {
 	
 	let { top, left, color, radius } = opts
 	let timeout
 	
-	let $container = $(opts.container)
+	let $container = $(parent)
 	let $el = $('<div class="dot"></div>')
 	$el.css({
 		background: color,
@@ -43,27 +43,21 @@ module.exports = function (opts) {
 		clearTimeout(timeout)
 		$el.appendTo($container)
 		velocity($el[0], {
-			opacity: [1.0, 0.0],
-			scale: [1.0, 1.5]
+			opacity: [1.0, 0.0]
 		}, {
 			duration: random(1500, 2000),
-			easing: 'spring',
-			complete: function () {
-				timeout = setTimeout(remove, DELAY)
-			}
+			easing: 'ease',
+			complete: () => timeout = setTimeout(remove, INTERVAL)
 		})
 	}
 	
 	function remove () {
 		velocity($el[0], {
-			opacity: 0.0,
-			scale: 0.5
+			opacity: 0.0
 		}, {
 			duration: random(400, 800),
-			easing: 'easeOutExpo',
-			complete: function() {
-				$el.remove()
-			}
+			easing: 'ease',
+			complete: () => $el.remove()
 		})
 	}
 	
