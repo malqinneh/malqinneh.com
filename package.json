@@ -2,7 +2,7 @@
   "name": "malqinneh",
   "version": "0.0.1",
   "description": "A personal site for Mustafa Al-Qinneh",
-  "main": "app.js",
+  "main": "server.js",
   "private": true,
   "dependencies": {
     "app-root-path": "^1.0.0",
