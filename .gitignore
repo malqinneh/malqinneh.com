@@ -1,0 +1,9 @@
+# OS X scraps
+.DS_Store
+
+# npm scraps
+node_modules/
+npm-debug.log
+
+# site scraps
+build/
