@@ -1,3 +1,4 @@
+
 @import 'modules/variables';
 
 @import 'partials/normalize';
@@ -6,13 +7,6 @@
 /**
  * Mustafa's Styles
  */
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
 
 html {
   background: #fff;
@@ -30,19 +24,10 @@ body {
   line-height: 2.0;
 }
 
-main.hovered,
-main.hovered a {
-  color: #B0BEC6;
-}
-
 a {
   color: #404C50;
   text-decoration: none;
   transition: color 150ms ease 50ms;
-}
-
-main a:hover {
-  color: #404C50; 
 }
 
 main {
@@ -62,6 +47,15 @@ main {
     opacity: 1.0;
     transform: translate(-50%, -50%) translateY(0);
   }
+}
+
+main.hovered,
+main.hovered a {
+  color: #B0BEC6;
+}
+
+main a:hover {
+  color: #404C50; 
 }
 
 .canvas {

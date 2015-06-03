@@ -19,7 +19,6 @@ const socket = engine(`ws://${host}:${port}`)
 /**
  * Kick it off
  */
- 
 ready(function () {
 	
 	const $canvas = $('.canvas')
@@ -42,4 +41,3 @@ ready(function () {
 	})
 	
 })
-
