@@ -34,6 +34,7 @@ ready(function () {
 		console.log('opening')
 		socket.on('message', function (message) {
 			let opts = JSON.parse(message)
+			console.log('a')
 			for (let info of opts.dots) {
 				dot($canvas, info)
 			}

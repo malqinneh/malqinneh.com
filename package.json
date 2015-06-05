@@ -12,6 +12,7 @@
     "domready": "^1.0.8",
     "engine.io": "^1.5.1",
     "engine.io-client": "^1.5.1",
+    "nearby": "0.0.3",
     "randf": "^1.0.0",
     "velocity-animate": "^1.2.2",
     "ws": "^0.7.2"
