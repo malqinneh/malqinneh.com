@@ -22,7 +22,7 @@ const DISTANCE = parseInt(config.dots.minimumDistance, 10)
  * Utils
  */
 const randomIndex = (arr) => Math.floor(Math.random() * arr.length)
-const distance = (a, b) => Math.abs(a - b)
+const parse = (num) => parseInt(num, 10)
 const point = () => random(PADDING, 100 - PADDING)
 const near = nearby(DISTANCE)
 
@@ -32,12 +32,10 @@ const near = nearby(DISTANCE)
 const server = engine.listen(config.port)
 const dots = []
 
-// Populate dots to start out
+// Kick things off
 for (let i = 0; i < COUNT; i++) {
 	dots.push(dot())
 }
-
-// Kick things off
 setInterval(heartbeat, INTERVAL)
 
 server.broadcast = function (message, source) {
@@ -71,9 +69,11 @@ function dot () {
 }
 
 function noNearby (arr, prop) {
+	const positions = arr.map((pt) => parse(pt[prop]))
+	// Keep generating positions until there are no other dots nearby
 	let result = point()
-	// keep generating positions until there are none nearby
-	let positions = arr.map((pt) => parseInt(pt[prop], 10))
-	while (near(positions, result)) result = point()
+	while (near(positions, result)) {
+		result = point()
+	}
 	return result
 }

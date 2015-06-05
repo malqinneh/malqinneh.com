@@ -31,12 +31,11 @@ ready(function () {
 		.on('mouseout', () => $main.removeClass('hovered'))
 	
 	socket.on('open', function () {
-		console.log('opening')
+		console.log('Connected to server...')
 		socket.on('message', function (message) {
-			let opts = JSON.parse(message)
-			console.log('a')
-			for (let info of opts.dots) {
-				dot($canvas, info)
+			const data = JSON.parse(message)
+			for (let d of data.dots) {
+				dot($canvas, d)
 			}
 		})
 	})

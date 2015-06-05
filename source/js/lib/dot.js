@@ -21,9 +21,9 @@ const INTERVAL = config.dots.interval
 module.exports = function (parent, opts) {
 	
 	let { top, left, color, radius } = opts
+	let $container = $(parent)
 	let timeout
 	
-	let $container = $(parent)
 	let $el = $('<div class="dot"></div>')
 	$el.css({
 		background: color,
