@@ -1,6 +1,4 @@
-
 @import 'modules/variables';
-
 @import 'partials/normalize';
 @import 'partials/reset';
 
@@ -17,7 +15,7 @@ html {
 body {
   position: relative;
   color: #808C90;
-  font-family: 'Basis Grotesque Pro Off-White', 'Helvetica Neue', Arial, Droid, sans-serif; 
+  font-family: 'Basis Grotesque Pro Off-White', 'Helvetica Neue', Arial, Droid, sans-serif;
   font-weight: normal;
   font-style: normal;
   font-size: 2.5rem;
@@ -27,7 +25,7 @@ body {
 a {
   color: #404C50;
   text-decoration: none;
-  transition: color 150ms ease 50ms;
+  transition: color 200ms ease;
 }
 
 main {
@@ -41,10 +39,10 @@ main {
   transform: translate(-50%, -50%) translateY(2rem);
   transition:
     transform 1000ms cubic-bezier(0.190, 1.000, 0.220, 1.000),
-    opacity 350ms ease,
-    color 150ms ease 50ms;
+    opacity 400ms ease,
+    color 200ms ease;
   html.wf-active & {
-    opacity: 1.0;
+    opacity: 0.99;
     transform: translate(-50%, -50%) translateY(0);
   }
 }
@@ -55,7 +53,7 @@ main.hovered a {
 }
 
 main a:hover {
-  color: #404C50; 
+  color: #404C50;
 }
 
 .canvas {

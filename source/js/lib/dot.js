@@ -19,27 +19,28 @@ const INTERVAL = config.dots.interval
  * Export `dot`
  */
 module.exports = function (parent, opts) {
-	
+
 	let { top, left, color, radius } = opts
 	let $container = $(parent)
 	let timeout
-	
+
 	let $el = $('<div class="dot"></div>')
 	$el.css({
 		background: color,
 		width: radius * 2 + 'px',
 		height: radius * 2 + 'px',
-		top,
-		left
+		top: top,
+		left: left
 	})
-	
+
 	add()
-	
+
 	return {
 		add: add,
-		remove: remove
+		remove: remove,
+		el: $el
 	}
-	
+
 	function add () {
 		clearTimeout(timeout)
 		$el.appendTo($container)
@@ -51,7 +52,7 @@ module.exports = function (parent, opts) {
 			complete: () => timeout = setTimeout(remove, INTERVAL)
 		})
 	}
-	
+
 	function remove () {
 		velocity($el[0], {
 			opacity: 0.0
@@ -61,5 +62,5 @@ module.exports = function (parent, opts) {
 			complete: () => $el.remove()
 		})
 	}
-	
+
 }
