@@ -4,27 +4,27 @@
 /**
  * Dependencies
  */
-const $ = require('cash-dom')
-const random = require('randf')
-const velocity = require('velocity-animate')
-const config = require('../../../config')
+var $ = require('cash-dom')
+var random = require('randf')
+var velocity = require('velocity-animate')
+var config = require('../../../config')
 
 /**
  * Config
  */
-const COLORS = config.dots.colors
-const INTERVAL = config.dots.interval
+var COLORS = config.dots.colors
+var INTERVAL = config.dots.interval
 
 /**
  * Export `dot`
  */
 module.exports = function (parent, opts) {
 
-	let { top, left, color, radius } = opts
-	let $container = $(parent)
-	let timeout
+	var { top, left, color, radius } = opts
+	var $container = $(parent)
+	var timeout
 
-	let $el = $('<div class="dot"></div>')
+	var $el = $('<div class="dot"></div>')
 	$el.css({
 		background: color,
 		width: radius * 2 + 'px',
@@ -37,8 +37,7 @@ module.exports = function (parent, opts) {
 
 	return {
 		add: add,
-		remove: remove,
-		el: $el
+		remove: remove
 	}
 
 	function add () {

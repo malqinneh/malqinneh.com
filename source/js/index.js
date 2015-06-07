@@ -2,26 +2,29 @@
 /**
  * Dependencies
  */
-const $ = require('cash-dom')
-const ready = require('domready')
-const engine = require('engine.io-client')
-const config = require('../../config')
-const dot = require('./lib/dot')
-const track = require('./lib/track')
+var $ = require('cash-dom')
+var ready = require('domready')
+var engine = require('engine.io-client')
+var config = require('../../config')
+var dot = require('./lib/dot')
+var track = require('./lib/track')
 
 /**
  * Config
  */
-const host = window.location.hostname
-const port = config.port
-const socket = engine(`ws://${host}:${port}`)
+var host = window.location.hostname
+var port = config.port
+var socket = engine(`ws://${host}:${port}`)
 
 /**
  * Kick it off
  */
 ready(function () {
-	const $canvas = $('.canvas')
-	const $main = $('main')
+
+	var $body = $(document.body)
+	var $canvas = $('.canvas')
+	var $main = $('.primary')
+	var $info = $('.info')
 
 	// Track clicks on links for analytics purposes
 	track('[data-track="email"]',    'Clicked email link')
@@ -32,12 +35,16 @@ ready(function () {
 	// Temporary fix for https://github.com/kenwheeler/cash/issues/54
 	// Should actually be `$main.find('a')`
 	$('main a')
-		.on('mouseover', () => $main.addClass('hovered'))
-		.on('mouseout', () => $main.removeClass('hovered'))
+		.on('mouseover', () => $body.addClass('link-hovered'))
+		.on('mouseout', () => $body.removeClass('link-hovered'))
+
+	$info
+		.on('mouseover', () => $body.addClass('info-hovered'))
+		.on('mouseout', () => $body.removeClass('info-hovered'))
 
 	socket.on('open', function () {
 		socket.on('message', function (message) {
-			const data = JSON.parse(message)
+			var data = JSON.parse(message)
 			for (let d of data.dots) {
 				dot($canvas, d)
 			}

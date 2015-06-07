@@ -4,33 +4,33 @@
 /**
  * Dependencies
  */
-const engine = require('engine.io')
-const random = require('randf')
-const nearby = require('nearby')
-const config = require('./config')
+var engine = require('engine.io')
+var random = require('randf')
+var nearby = require('nearby')
+var config = require('./config')
 
 /**
  * Config
  */
-const COLORS = config.dots.colors
-const COUNT = config.dots.count
-const INTERVAL = config.dots.interval
-const PADDING = parseInt(config.dots.padding, 10)
-const DISTANCE = parseInt(config.dots.minimumDistance, 10)
+var COLORS = config.dots.colors
+var COUNT = config.dots.count
+var INTERVAL = config.dots.interval
+var PADDING = parseInt(config.dots.padding, 10)
+var DISTANCE = parseInt(config.dots.minimumDistance, 10)
 
 /**
  * Utils
  */
-const randomIndex = (arr) => Math.floor(Math.random() * arr.length)
-const parse = (num) => parseInt(num, 10)
-const point = () => random(PADDING, 100 - PADDING)
-const near = nearby(DISTANCE)
+var randomIndex = (arr) => Math.floor(Math.random() * arr.length)
+var parse = (num) => parseInt(num, 10)
+var point = () => random(PADDING, 100 - PADDING)
+var near = nearby(DISTANCE)
 
 /**
  * Begin
  */
-const server = engine.listen(config.port)
-const dots = []
+var server = engine.listen(config.port)
+var dots = []
 
 // Kick things off
 for (let i = 0; i < COUNT; i++) {
@@ -69,7 +69,7 @@ function dot () {
 }
 
 function noNearby (arr, prop) {
-	const positions = arr.map((pt) => parse(pt[prop]))
+	var positions = arr.map((pt) => parse(pt[prop]))
 	// Keep generating positions until there are no other dots nearby
 	let result = point()
 	while (near(positions, result)) {

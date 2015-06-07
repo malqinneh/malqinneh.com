@@ -27,15 +27,20 @@
   </script>
 </head>
 <body>
-  <main>
+
+  <main class="primary">
     <p>Hello, my name is <a href="mailto:hello@malqinneh.com" data-track="email">Mustafa</a>. I love crafting user-friendly <a href="http://dribbble.com/malqinneh" target="_blank" data-track="dribbble">interfaces</a>, and building things that <a href="http://watsi.org" target="_blank" data-track="watsi">help people</a> and <a href="http://hellopodium.com" target="_blank" data-track="podium">provide&nbsp;value</a>.</p>
   </main>
+
   <div class="secondary">
-    <p>For a connected experience; the squence of dots are the same for all visitors on this website.</p>
+    <p>For a connected experience; the sequence of dots are the same for all&nbsp;visitors&nbsp;on&nbsp;this&nbsp;website.</p>
   </div>
-    <img class="info" src="//info.svg">
-  <div class="canvas">
-  </div>
+  <span class="info">
+    <img src="/assets/info.svg">
+  </span>
+
+  <div class="canvas"></div>
+
   <script src="assets/index.js"></script>
   <script type="text/javascript">
     !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.0.1";
@@ -43,5 +48,6 @@
     analytics.page()
     }}();
   </script>
+
 </body>
 </html>

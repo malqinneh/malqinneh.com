@@ -22,7 +22,7 @@ BROWSERS = "last 2 versions"
 # Tasks
 #
 
-all: assets styles scripts
+build: assets styles scripts
 	@true
 
 develop: install
@@ -40,6 +40,9 @@ budo-assets:
 budo-server:
 	@$(BIN)/nodemon --quiet -- --harmony --harmony_arrow_functions server.js
 
+deploy: build
+		@tar -zcf backup-$(date +%Y-%m-%d).tar.gz ./$(BUILD)
+
 server:
 	@node --harmony --harmony_arrow_functions server.js
 
@@ -53,7 +56,7 @@ clean-deps:
 #
 
 install: node_modules
-assets: $(BUILD)/index.html
+assets: $(BUILD)/index.html $(BUILD)/assets/info.svg
 scripts: $(BUILD)/assets/index.js
 styles: $(BUILD)/assets/styles.css
 
@@ -65,6 +68,10 @@ node_modules: package.json
 	@npm install
 
 $(BUILD)/%: $(SOURCE)/%
+	@mkdir -p $(@D)
+	@cp $< $@
+
+$(BUILD)/assets/%: $(SOURCE)/%
 	@mkdir -p $(@D)
 	@cp $< $@
 

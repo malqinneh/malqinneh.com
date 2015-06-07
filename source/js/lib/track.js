@@ -2,15 +2,15 @@
 /**
  * Module dependencies
  */
-const $ = require('cash-dom')
+var $ = require('cash-dom')
 
 /**
  * Export `track`
  */
 module.exports = function (selector, eventName, props) {
 
-	const $el = $(selector)
-	const href = $el.attr('href')
+	var $el = $(selector)
+	var href = $el.attr('href')
 
 	$el.on('click', function (e) {
 		analytics.track(eventName, props)
