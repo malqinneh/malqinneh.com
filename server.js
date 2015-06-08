@@ -29,7 +29,7 @@ var near = nearby(DISTANCE)
 /**
  * Begin
  */
-var server = engine.listen(config.port)
+var server = engine.listen(process.env.PORT)
 var dots = []
 
 // Kick things off
