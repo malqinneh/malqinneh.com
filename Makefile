@@ -22,6 +22,7 @@ BROWSERS = "last 2 versions"
 DOMAIN   = $(shell cat CNAME)
 REPO     = malqinneh/malqinneh.com
 BRANCH   = $(shell git rev-parse --abbrev-ref HEAD)
+HOST     = $(shell node -pe "require('./config').server.host")
 
 #
 # Tasks
@@ -29,6 +30,8 @@ BRANCH   = $(shell git rev-parse --abbrev-ref HEAD)
 
 build: assets styles scripts
 	@true
+
+build-server: $(BUILD)/server.js $(BUILD)/Procfile $(BUILD)/package.json $(BUILD)/config.json
 
 develop: install
 	@clear
@@ -57,6 +60,20 @@ deploy:
 		echo "\033[0m")
 	@make clean
 	@echo "Deployed to \033[0;32mhttp://$(DOMAIN)\033[0m"
+
+deploy-server:
+	@echo "Deploying server from branch \033[0;33m$(BRANCH)\033[0m to \033[0;32m$(HOST)\033[0m..."
+	@make clean && make build-server
+		@(cd $(BUILD) && \
+		git init -q .  && \
+		git add . && \
+		git commit -q -m "Deployment (auto-commit)" && \
+		echo "\033[0;90m" && \
+		git remote add dokku dokku@signal.to:malqinneh && \
+		git push dokku master --force && \
+		echo "\033[0m")
+	@make clean
+	@echo "Deployed to \033[0;32m$(HOST)\033[0m"
 
 clean:
 	@rm -rf build
@@ -87,9 +104,13 @@ $(BUILD)/assets/%: $(SOURCE)/%
 	@mkdir -p $(@D)
 	@cp $< $@
 
-$(BUILD)/CNAME: ./CNAME
+$(BUILD)/%: %
 	@mkdir -p $(@D)
 	@cp $< $@
+
+$(BUILD)/server.js: server.js
+	@mkdir -p $(@D)
+	@babel $< > $@
 
 $(BUILD)/assets/index.js: $(SCRIPTS)
 	@mkdir -p $(@D)

@@ -12,8 +12,8 @@ var track = require('./lib/track')
 /**
  * Config
  */
-var host = window.location.hostname
-var port = config.port
+var host = config.server.host
+var port = config.server.port
 var socket = engine(`ws://${host}:${port}`)
 
 /**
