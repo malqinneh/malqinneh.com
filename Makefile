@@ -13,10 +13,15 @@ BIN := ./node_modules/.bin
 PORT     = 8080
 SOURCE   = ./source
 BUILD    = ./build
+
 SCRIPTS  = $(shell find $(SOURCE)/js -type f -name '*.js')
 STYLES   = $(shell find $(SOURCE)/css -type f -name '*.scss')
 
 BROWSERS = "last 2 versions"
+
+DOMAIN   = $(shell cat CNAME)
+REPO     = malqinneh/malqinneh.com
+BRANCH   = $(shell git rev-parse --abbrev-ref HEAD)
 
 #
 # Tasks
@@ -40,11 +45,18 @@ budo-assets:
 budo-server:
 	@$(BIN)/nodemon --quiet -- --harmony --harmony_arrow_functions server.js
 
-deploy: build
-		@tar -zcf backup-$(date +%Y-%m-%d).tar.gz ./$(BUILD)
-
-server:
-	@node --harmony --harmony_arrow_functions server.js
+deploy:
+	@echo "Deploying branch \033[0;33m$(BRANCH)\033[0m to Github pages..."
+	@make clean && make build
+	@(cd $(BUILD) && \
+		git init -q .  && \
+		git add . && \
+		git commit -q -m "Deployment (auto-commit)" && \
+		echo "\033[0;90m" && \
+		git push "git@github.com:$(REPO).git" master:gh-pages --force && \
+		echo "\033[0m")
+	@make clean
+	@echo "Deployed to \033[0;32mhttp://$(DOMAIN)\033[0m"
 
 clean:
 	@rm -rf build
@@ -56,7 +68,7 @@ clean-deps:
 #
 
 install: node_modules
-assets: $(BUILD)/index.html $(BUILD)/assets/info.svg
+assets: $(BUILD)/CNAME $(BUILD)/index.html $(BUILD)/favicon.png
 scripts: $(BUILD)/assets/index.js
 styles: $(BUILD)/assets/styles.css
 
@@ -72,6 +84,10 @@ $(BUILD)/%: $(SOURCE)/%
 	@cp $< $@
 
 $(BUILD)/assets/%: $(SOURCE)/%
+	@mkdir -p $(@D)
+	@cp $< $@
+
+$(BUILD)/CNAME: ./CNAME
 	@mkdir -p $(@D)
 	@cp $< $@
 
