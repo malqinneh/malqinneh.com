@@ -31,7 +31,7 @@ HOST     = $(shell node -pe "require('./config').server.host")
 build: assets styles scripts
 	@true
 
-build-server: $(BUILD)/server.js $(BUILD)/Procfile $(BUILD)/package.json $(BUILD)/config.json
+build-server: $(BUILD)/server.js $(BUILD)/package.json $(BUILD)/config.json
 
 develop: install
 	@clear
