@@ -33,7 +33,7 @@ build: assets styles scripts
 
 build-server: $(BUILD)/server.js $(BUILD)/package.json $(BUILD)/config.json
 
-develop: install
+watch: install
 	@clear
 	@make -j3 budo budo-assets budo-server
 
