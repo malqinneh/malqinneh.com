@@ -46,7 +46,7 @@ budo:
 budo-assets:
 	@watch make assets styles --silent
 budo-server:
-	@$(BIN)/nodemon --quiet -- --harmony --harmony_arrow_functions server.js
+	@$(BIN)/nodemon --quiet -- --harmony server.js
 
 deploy:
 	@echo "Deploying branch \033[0;33m$(BRANCH)\033[0m to Github pages..."
@@ -85,7 +85,7 @@ clean-deps:
 #
 
 install: node_modules
-assets: $(BUILD)/CNAME $(BUILD)/index.html $(BUILD)/favicon.png
+assets: $(BUILD)/CNAME $(BUILD)/index.html $(BUILD)/favicon.png $(BUILD)/assets/fonts/
 scripts: $(BUILD)/assets/index.js
 styles: $(BUILD)/assets/styles.css
 
@@ -98,15 +98,15 @@ node_modules: package.json
 
 $(BUILD)/%: $(SOURCE)/%
 	@mkdir -p $(@D)
-	@cp $< $@
+	@cp -r $< $@
 
 $(BUILD)/assets/%: $(SOURCE)/%
 	@mkdir -p $(@D)
-	@cp $< $@
+	@cp -r $< $@
 
 $(BUILD)/%: %
 	@mkdir -p $(@D)
-	@cp $< $@
+	@cp -r $< $@
 
 $(BUILD)/server.js: server.js
 	@mkdir -p $(@D)

@@ -6,6 +6,16 @@
  * Mustafa's Styles
  */
 
+ @font-face {
+   font-family: 'Basis Grotesque Pro Off-White';
+   src:
+     url('/assets/fonts/basis-grotesque-off-white.woff') format('woff'),
+     url('/assets/fonts/basis-grotesque-off-white.woff2') format('woff2');
+   font-weight: normal;
+   font-style: normal;
+ }
+
+
 html {
   background: #fff;
   font-size: 16px;
@@ -92,8 +102,8 @@ a {
  * States
  */
 
-.wf-active .primary,
-.wf-active .info {
+.primary,
+.info {
   opacity: 0.99;
 }
 
