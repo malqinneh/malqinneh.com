@@ -1,6 +1,6 @@
 {
 	"server": {
-		"host": "malqinneh.signal.to",
+		"host": "malqinneh.herokuapp.com",
 		"port": 80
 	},
 	"dots": {
