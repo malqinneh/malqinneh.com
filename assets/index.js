@@ -10227,7 +10227,7 @@ var track = require('./lib/track');
  */
 var host = config.server.host;
 var port = config.server.port;
-var socket = engine('ws://' + host + ':' + port);
+var socket = engine('wss://' + host + ':' + port);
 
 /**
  * Kick it off
